@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+    MD3LightTheme as PaperTheme,
+    Provider as PaperProvider,
+    Theme,
+} from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Home } from 'src/screens/Home';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const theme: Theme = {
+    ...PaperTheme,
+    colors: {
+        ...PaperTheme.colors,
+        primary: '#50A555',
+        secondary: '#0194D6',
+    },
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+    return (
+        <PaperProvider theme={theme}>
+            <SafeAreaProvider>
+                <Home />
+            </SafeAreaProvider>
+        </PaperProvider>
+    );
+};
+
+export type AppTheme = typeof PaperTheme;
+
+export default App;
